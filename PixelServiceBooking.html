@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pixel Service Center - Booking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --grey:#777; --card:#ffffff; --bg:#f5f5f5; --brand:#4285f4;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#222}
+    header{display:flex;align-items:center;gap:12px;padding:14px 18px;background:#fff;border-bottom:1px solid #e5e5e5}
+    .glogo{width:32px;height:32px}
+    header h1{margin:0;font-size:28px;color:var(--grey);font-weight:700}
+    .wrap{max-width:720px;margin:20px auto;padding:0 14px}
+    .card{background:var(--card);border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.06);padding:22px}
+    h2{margin:6px 0 16px 0}
+    .summary{background:#fafafa;border:1px solid #e3e3e3;border-radius:10px;padding:14px;margin-bottom:18px}
+    .row{display:flex;gap:10px;margin:6px 0}
+    .label{min-width:100px;font-weight:700;color:#444}
+    label{display:block;margin:12px 0 6px;font-weight:700}
+    input,select,textarea{
+      width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;background:#fff;font-size:14px
+    }
+    textarea{resize:vertical}
+    button{
+      width:100%;margin-top:14px;background:var(--brand);color:#fff;border:0;border-radius:10px;
+      padding:12px 16px;font-size:16px;cursor:pointer
+    }
+    button:hover{filter:brightness(.95)}
+    footer{margin:26px 0 16px;text-align:center;color:#555;font-size:13px;line-height:1.4}
+    .addr{font-weight:600}
+    .contact{display:flex;justify-content:center;align-items:center;gap:18px;padding:10px 14px}
+    .contact a{display:inline-flex;align-items:center;gap:8px;color:#111;text-decoration:none}
+    .contact .icon{width:24px;height:24px;display:inline-block}
+    .contact .phone-text{font-size:18px;font-weight:700}
+    .slash{opacity:.5}
+  </style>
+  <script>
+    function submitBooking(e) {
+  e.preventDefault(); 
+
+  // For now, just show a quick confirmation
+  alert('✅ Thank you! Your booking request for pixel Service has been recorded. We will contact you shortly.');
+
+  // Optional: clear page-1 data
+  localStorage.removeItem('psc_device');
+  localStorage.removeItem('psc_warranty');
+  localStorage.removeItem('psc_issue');
+}
+</script>
+
+</head>
+<script>
+  window.onload = function () {
+    // Get saved data from Page 1
+    const device = localStorage.getItem('psc_device') || '';
+    const warranty = localStorage.getItem('psc_warranty') || '';
+    const issue = localStorage.getItem('psc_issue') || '';
+
+    // Show on screen
+    document.getElementById('sDevice').textContent = device || 'Not provided';
+    document.getElementById('sWarranty').textContent = warranty || 'Not provided';
+    document.getElementById('sIssue').textContent = issue || 'Not provided';
+
+    // Push into hidden form fields (so Formspree receives them)
+    document.getElementById('hiddenDevice').value = device;
+    document.getElementById('hiddenWarranty').value = warranty;
+    document.getElementById('hiddenIssue').value = issue;
+  }
+</script>
+
+<body>
+  <header>
+    <!-- Same inline Google "G" -->
+    <svg class="glogo" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#EA4335" d="M24 9.5c3.35 0 6.36 1.16 8.73 3.43l6.53-6.53C35.7 2.28 30.27 0 24 0 14.62 0 6.53 5.38 2.69 13.18l7.64 5.93C12.01 13.77 17.53 9.5 24 9.5z"/>
+      <path fill="#4285F4" d="M46.5 24c0-1.63-.15-3.2-.45-4.71H24v9.02h12.65c-.55 2.96-2.23 5.47-4.76 7.16l7.31 5.66C43.99 36.8 46.5 30.89 46.5 24z"/>
+      <path fill="#FBBC05" d="M10.33 19.11l-7.64-5.93C.95 16.35 0 20.06 0 24c0 3.9.95 7.58 2.64 10.8l7.69-5.95C9.55 27.07 9 25.6 9 24c0-1.93.49-3.75 1.33-5z"/>
+      <path fill="#34A853" d="M24 48c6.3 0 11.6-2.07 15.47-5.66l-7.31-5.66C30.2 38.7 27.38 39.7 24 39.7c-6.48 0-11.99-4.29-13.67-10.06l-7.69 5.95C6.53 42.62 14.62 48 24 48z"/>
+    </svg>
+    <h1>Pixel Service Center</h1>
+  </header>
+
+  <div class="contact">
+    <a href="tel:+918304827018" aria-label="Call">
+      <!-- classic phone -->
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.1.36 2.29.56 3.58.56a1 1 0 011 1V21a1 1 0 01-1 1C10.29 22 2 13.71 2 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.29.19 2.48.56 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/>
+      </svg>
+      <span class="phone-text">+91 8304827018</span>
+    </a>
+    <span class="slash">/</span>
+    <a href="mailto:pixelpervicecenter1@gmail.com" aria-label="Email">
+      <!-- classic envelope -->
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M2 6a2 2 0 012-2h16a2 2 0 012 2v.35l-10 6.25L2 6.35V6zm0 2.65l9.35 5.84a2 2 0 002.3 0L23 8.65V18a2 2 0 01-2 2H3.99A2 2 0 012 18V8.65z"/>
+      </svg>
+      pixelpervicecenter1@gmail.com
+    </a>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+      <h2>Booking Details</h2>
+
+      <div class="summary">
+        <div class="row"><div class="label">Device:</div>   <div id="sDevice">…</div></div>
+        <div class="row"><div class="label">Warranty:</div> <div id="sWarranty">…</div></div>
+        <div class="row"><div class="label">Issue:</div>    <div id="sIssue">…</div></div>
+      </div>
+
+      <form action="https://formspree.io/f/mjkevgqw" method="POST">
+  <label>Name:</label><br>
+  <input type="text" name="name" required><br><br>
+
+  <label>Address:</label><br>
+  <textarea name="address" rows="3" required></textarea><br><br>
+
+  <label>Phone:</label><br>
+  <input type="tel" name="phone" required><br><br>
+
+  <label>Email:</label><br>
+  <input type="email" name="email" required><br><br>
+
+  <label>Preferred Confirmation:</label><br>
+  <select name="confirmation" required>
+    <option value="">-- Select --</option>
+    <option>Call</option>
+    <option>WhatsApp</option>
+    <option>SMS</option>
+    <option>Email</option>
+  </select>
+
+  <br><br>
+  <input type="hidden" name="device" id="hiddenDevice">
+  <input type="hidden" name="warranty" id="hiddenWarranty">
+  <input type="hidden" name="issue" id="hiddenIssue">
+
+  <button type="submit">Submit Booking</button>
+</form>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="addr">Ground Floor, Annas Arcade, Spencer Jn, Mahatma Gandhi Road, Thiruvananthapuram</div>
+    <div>All rights received | Since 2016</div>
+  </footer>
+</body>
+</html>
